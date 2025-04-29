@@ -147,7 +147,8 @@ function Collectibles() {
             <a href="https://policies.google.com/terms?hl=en-US">Terms of Service</a>
             <a href="https://policies.google.com/privacy?hl=en-US">Privacy Policy</a>
             <a href="#">Contact Us</a>
-            <a href="https://www.linkedin.com/in/tanmay-awal-548b0a322">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/shreyasi-doshi-9aa01a324">LinkedIn</a>
+
           </div>
           <div className="copyright">
             © 2025 Your Marketplace. All rights reserved.
