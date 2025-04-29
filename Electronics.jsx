@@ -3,29 +3,23 @@ import { Link, useNavigate } from "react-router-dom";
 import "./home.css"; // Reusing the same CSS as home page
 
 function Electronics() {
-  // State for favorites
   const [favorites, setFavorites] = useState({});
-  // State for product listings - fetch from localStorage or default to empty array
   const [listings, setListings] = useState([]);
   const [electronicsListings, setElectronicsListings] = useState([]);
   const navigate = useNavigate();
 
-  // Load listings and favorites from localStorage on component mount
   useEffect(() => {
-    // Load listings
     const savedListings = localStorage.getItem("ebayCloneListings");
     if (savedListings) {
       const allListings = JSON.parse(savedListings);
       setListings(allListings);
-      
-      // Filter listings for electronics category
+
       const electronicsItems = allListings.filter(
-        (item) => item.category === "Electronics" || item.category === "electronics"
+        (item) => item.category.toLowerCase() === "electronics"
       );
       setElectronicsListings(electronicsItems);
     }
 
-    // Load favorites
     const savedFavorites = localStorage.getItem("ebayCloneFavorites");
     if (savedFavorites) {
       setFavorites(JSON.parse(savedFavorites));
@@ -38,8 +32,6 @@ function Electronics() {
         ...prevFavorites,
         [productId]: !prevFavorites[productId],
       };
-
-      // Save favorites to localStorage
       localStorage.setItem("ebayCloneFavorites", JSON.stringify(updatedFavorites));
       return updatedFavorites;
     });
@@ -61,11 +53,7 @@ function Electronics() {
             />
           </div>
           <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search for anything"
-              className="search-input"
-            />
+            <input type="text" placeholder="Search for anything" className="search-input" />
             <button className="search-button">Search</button>
           </div>
           <div className="user-actions">
@@ -108,7 +96,8 @@ function Electronics() {
                   <button
                     className="favorite-button"
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent navigation on clicking favorite button
+                      e.preventDefault();
+                      e.stopPropagation();
                       toggleFavorite(product.id);
                     }}
                     style={{ color: favorites[product.id] ? "red" : "#777" }}
@@ -136,13 +125,19 @@ function Electronics() {
       <footer className="about-us-section">
         <div className="about-container">
           <h2>About Our Marketplace</h2>
-          <p>Welcome to our online marketplace, where buyers and sellers come together to discover great deals on a wide range of products.</p>
-          <p>Founded with the mission to connect people and products, we strive to offer the best selection, value, and convenience.</p>
+          <p>
+            Welcome to our online marketplace, where buyers and sellers come together to discover
+            great deals on a wide range of products.
+          </p>
+          <p>
+            Founded with the mission to connect people and products, we strive to offer the best
+            selection, value, and convenience.
+          </p>
           <div className="footer-links">
             <a href="https://policies.google.com/terms?hl=en-US">Terms of Service</a>
             <a href="https://policies.google.com/privacy?hl=en-US">Privacy Policy</a>
             <a href="#">Contact Us</a>
-            <a href="https://https://www.linkedin.com/in/shreyasi-doshi-9aa01a324">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/shreyasi-doshi-9aa01a324">LinkedIn</a>
           </div>
           <div className="copyright">
             © 2025 Your Marketplace. All rights reserved.
@@ -154,3 +149,4 @@ function Electronics() {
 }
 
 export default Electronics;
+
