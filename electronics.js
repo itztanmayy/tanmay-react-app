@@ -1,55 +1,60 @@
 import React from "react";
 
-// Sample product data (can be imported from a shared data file)
-const allProducts = [
-  {
-    id: 1,
-    name: "iPhone 12",
-    category: "Electronics",
-    price: 40000,
-    condition: "Used",
-    description: "Good condition, minor scratches",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.designinfo.in%2Fp%2Fapple-iphone-12https://enchttps://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.techspot.com%2Fdrivers%2Fdriver%2Ffile%2Finformation%2F18241%2F&psig=AOvVaw3cD7W1Ck4EpNue0yRJ7VMF&ust=1746034199785000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPiin7Pi_YwDFQAAAAAdAAAAABAJrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdqklFLDwYoU-u5qz6kKW5vTTJTbYNCCJzGg&s-mini-5g-64gb-green%2F&psig=AOvVaw01MA7ni4z9VclMkvbVm_a-&ust=1746033801446000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOiux_Xg_YwDFQAAAAAdAAAAABAJ"
-  },
-  {
-    id: 2,
-    name: "HP Laptop",
-    category: "Electronics",
-    price: 30000,
-    condition: "Used",
-    description: "8GB RAM, i5 processor",
-    image: "https://via.placeholder.com/150"
-  },
-  {
-    id: 3,
-    name: "Denim Jacket",
-    category: "Clothing",
-    price: 1200,
-    condition: "New",
-    description: "Stylish denim jacket",
-    image: "https://via.placeholder.com/150"
-  }
-];
-
 export default function Electronics() {
-  // Filter products for "Electronics"
-  const electronicsProducts = allProducts.filter(
-    (product) => product.category === "Electronics"
-  );
+  const electronicProducts = [
+    {
+      id: 1,
+      name: "Bluetooth Wireless Headphones",
+      category: "Electronics",
+      price: 3999,
+      condition: "New",
+      description: "Noise-cancelling Bluetooth headphones with 20 hours of battery life.",
+      image: "https://m.media-amazon.com/images/I/71tZ4uKHr8L._SL1500_.jpg"
+    },
+    {
+      id: 2,
+      name: "Smart LED TV",
+      category: "Electronics",
+      price: 24999,
+      condition: "New",
+      description: "Ultra HD Smart LED TV with built-in Wi-Fi and voice control.",
+      image: "https://m.media-amazon.com/images/I/91ogdQXTbWL._SL1500_.jpg"
+    },
+    {
+      id: 3,
+      name: "Smartphone",
+      category: "Electronics",
+      price: 24999,
+      condition: "New",
+      description: "Latest model with 128GB storage, 5G connectivity, and a high-quality camera.",
+      image: "https://m.media-amazon.com/images/I/81DJIlOpCwL._SL1500_.jpg"
+    }
+  ];
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+    }).format(price);
+  };
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Electronics</h1>
+      <h1>Latest Electronics</h1>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {electronicsProducts.map((item) => (
+        {electronicProducts.map((item) => (
           <div
             key={item.id}
             style={{
-              border: "1px solid #ccc",
-              borderRadius: "8px",
+              border: "1px solid #ddd",
+              borderRadius: "10px",
               padding: "15px",
-              width: "250px"
+              width: "250px",
+              boxShadow: "2px 2px 8px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
             }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+            onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
           >
             <img
               src={item.image}
@@ -58,23 +63,26 @@ export default function Electronics() {
                 width: "100%",
                 height: "150px",
                 objectFit: "cover",
-                borderRadius: "5px"
+                borderRadius: "5px",
               }}
             />
             <h3>{item.name}</h3>
             <p>Condition: {item.condition}</p>
-            <p>Price: ₹{item.price}</p>
-            <p>{item.description}</p>
+            <p>Price: {formatPrice(item.price)}</p>
+            <p style={{ fontSize: "0.9em", color: "#555" }}>{item.description}</p>
             <button
               style={{
-                marginTop: "10px",
-                backgroundColor: "#3498db",
+                backgroundColor: "#27ae60",
                 color: "white",
                 border: "none",
                 padding: "8px 12px",
                 borderRadius: "5px",
-                cursor: "pointer"
+                cursor: "pointer",
+                marginTop: "10px",
+                transition: "background-color 0.2s",
               }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#2ecc71"}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = "#27ae60"}
             >
               Add to Cart
             </button>
@@ -84,3 +92,4 @@ export default function Electronics() {
     </div>
   );
 }
+
