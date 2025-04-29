@@ -68,7 +68,6 @@ function Home() {
           <Link to="/collectibles" className="nav-item">Collectibles and Art</Link>
           <Link to="/sports" className="nav-item">Sports</Link>
           <Link to="/health" className="nav-item">Health</Link>
-          <Link to="/deals" className="nav-item">Deals</Link>
         </div>
       </nav>
 
