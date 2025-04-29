@@ -78,11 +78,52 @@
 }
 
 .sell-button {
-  color: #333;
+  color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   margin-left: 8px;
+  background-color: #007bff; 
+  padding: 10px 20px;
+  border-radius: 5px; 
+  border: none; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.sell-button:hover {
+  background-color: #0056b3; 
+  transform: translateY(-2px); 
+}
+
+.sell-button:focus {
+  outline: none; 
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.selll-button {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 1px;
+  margin-top: 7px;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px; 
+  border: none; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.selll-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px); 
+}
+
+.selll-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5); 
+}
+
 
 .notification-icon, .cart-icon {
   font-size: 20px;
@@ -136,7 +177,7 @@
   border-radius: 3px;
   width: 100%;
   box-sizing: border-box;
-  background-image: url('https://via.placeholder.com/800x350'); /* Replace with your own image */
+  background-image: url('https://via.placeholder.com/800x350'); 
   background-position: right center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -210,6 +251,7 @@
   transition: transform 0.2s, box-shadow 0.2s;
   background: white;
   position: relative;
+  cursor: pointer;
 }
 
 .product-card:hover {
