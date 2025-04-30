@@ -7,7 +7,7 @@ function Notification() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // You can later replace this with a fetch from an API or localStorage
+    // Simulate fetching notifications
     const mockNotifications = [
       { id: 1, message: "Your order for 'Wireless Headphones' has been shipped.", date: "2025-04-27" },
       { id: 2, message: "New deals available in Electronics!", date: "2025-04-26" },
@@ -55,24 +55,15 @@ function Notification() {
         </div>
       </nav>
 
-      {/* Notifications */}
+      {/* Notifications Section */}
       <section className="category-listings">
         <h2>Notifications</h2>
         {notifications.length > 0 ? (
-          <div style={{ padding: "10px 20px" }}>
+          <div className="notification-list">
             {notifications.map((note) => (
-              <div
-                key={note.id}
-                style={{
-                  backgroundColor: "#f5f5f5",
-                  padding: "15px",
-                  borderRadius: "8px",
-                  marginBottom: "10px",
-                  boxShadow: "1px 1px 4px rgba(0,0,0,0.1)"
-                }}
-              >
-                <div style={{ fontWeight: "bold", color: "#333" }}>{note.message}</div>
-                <div style={{ fontSize: "0.9em", color: "#888" }}>{note.date}</div>
+              <div key={note.id} className="notification-card">
+                <div className="notification-message">{note.message}</div>
+                <div className="notification-date">{note.date}</div>
               </div>
             ))}
           </div>
@@ -94,8 +85,7 @@ function Notification() {
             <a href="https://policies.google.com/terms?hl=en-US">Terms of Service</a>
             <a href="https://policies.google.com/privacy?hl=en-US">Privacy Policy</a>
             <a href="#">Contact Us</a>
-           <a href="https://www.linkedin.com/in/shreyasi-doshi-9aa01a324">LinkedIn</a>
-
+            <a href="https://www.linkedin.com/in/shreyasi-doshi-9aa01a324">LinkedIn</a>
           </div>
           <div className="copyright">
             © 2025 Your Marketplace. All rights reserved.
@@ -107,3 +97,4 @@ function Notification() {
 }
 
 export default Notification;
+
