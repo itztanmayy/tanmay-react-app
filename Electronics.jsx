@@ -3,23 +3,29 @@ import { Link, useNavigate } from "react-router-dom";
 import "./home.css"; // Reusing the same CSS as home page
 
 function Electronics() {
+  // State for favorites
   const [favorites, setFavorites] = useState({});
+  // State for product listings - fetch from localStorage or default to empty array
   const [listings, setListings] = useState([]);
   const [electronicsListings, setElectronicsListings] = useState([]);
   const navigate = useNavigate();
 
+  // Load listings and favorites from localStorage on component mount
   useEffect(() => {
+    // Load listings
     const savedListings = localStorage.getItem("ebayCloneListings");
     if (savedListings) {
       const allListings = JSON.parse(savedListings);
       setListings(allListings);
-
+      
+      // Filter listings for electronics category
       const electronicsItems = allListings.filter(
-        (item) => item.category.toLowerCase() === "electronics"
+        (item) => item.category === "Electronics" || item.category === "electronics"
       );
       setElectronicsListings(electronicsItems);
     }
 
+    // Load favorites
     const savedFavorites = localStorage.getItem("ebayCloneFavorites");
     if (savedFavorites) {
       setFavorites(JSON.parse(savedFavorites));
@@ -32,6 +38,8 @@ function Electronics() {
         ...prevFavorites,
         [productId]: !prevFavorites[productId],
       };
+
+      // Save favorites to localStorage
       localStorage.setItem("ebayCloneFavorites", JSON.stringify(updatedFavorites));
       return updatedFavorites;
     });
@@ -41,19 +49,27 @@ function Electronics() {
     navigate("/sell");
   };
 
+  const handleclick =() => {
+    navigate("/");
+  };
+
   return (
     <div className="ebay-homepage">
       <header className="main-header">
         <div className="search-container">
           <div className="logo-container">
-            <img
+            <img onClick={handleclick}
               src="https://itembase.com/wp-content/uploads/2023/02/241-200px600px-Color.png"
               alt="eBay Logo"
               className="ebay-logo"
             />
           </div>
           <div className="search-bar">
-            <input type="text" placeholder="Search for anything" className="search-input" />
+            <input
+              type="text"
+              placeholder="Search for anything"
+              className="search-input"
+            />
             <button className="search-button">Search</button>
           </div>
           <div className="user-actions">
@@ -78,14 +94,14 @@ function Electronics() {
         </div>
       </nav>
 
-      <section className="category-banner">
+      <section className="hero-banner">
         <div className="banner-content">
           <h1>Electronics</h1>
-          <p>Discover the latest gadgets and electronic devices.</p>
+          <p>Explore the latest gadgets, devices, and tech accessories.</p>
         </div>
       </section>
 
-      <section className="category-listings">
+      <section className="fresh-recommendations">
         <h2>Electronics Products</h2>
         <div className="product-grid">
           {electronicsListings.length > 0 ? (
@@ -96,8 +112,7 @@ function Electronics() {
                   <button
                     className="favorite-button"
                     onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
+                      e.stopPropagation(); // Prevent navigation on clicking favorite button
                       toggleFavorite(product.id);
                     }}
                     style={{ color: favorites[product.id] ? "red" : "#777" }}
@@ -115,8 +130,8 @@ function Electronics() {
             ))
           ) : (
             <div className="no-listings-message">
-              <p>No electronics listings available yet. Be the first to sell electronics!</p>
-              <button onClick={handleSellClick} className="selll-button">Sell Electronics Now</button>
+              <p>No electronics listings available yet. Be the first to sell electronics items!</p>
+              <button onClick={handleSellClick} className="selll-button">Sell Electronics Items Now</button>
             </div>
           )}
         </div>
@@ -125,14 +140,8 @@ function Electronics() {
       <footer className="about-us-section">
         <div className="about-container">
           <h2>About Our Marketplace</h2>
-          <p>
-            Welcome to our online marketplace, where buyers and sellers come together to discover
-            great deals on a wide range of products.
-          </p>
-          <p>
-            Founded with the mission to connect people and products, we strive to offer the best
-            selection, value, and convenience.
-          </p>
+          <p>Welcome to our online marketplace, where buyers and sellers come together to discover great deals on a wide range of products.</p>
+          <p>Founded with the mission to connect people and products, we strive to offer the best selection, value, and convenience.</p>
           <div className="footer-links">
             <a href="https://policies.google.com/terms?hl=en-US">Terms of Service</a>
             <a href="https://policies.google.com/privacy?hl=en-US">Privacy Policy</a>
@@ -149,4 +158,3 @@ function Electronics() {
 }
 
 export default Electronics;
-
